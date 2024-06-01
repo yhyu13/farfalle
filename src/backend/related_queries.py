@@ -11,6 +11,9 @@ from backend.schemas import RelatedQueries, SearchResult
 
 load_dotenv()
 
+openai.base_url = os.environ.get("OPENAI_BASE_URL", "https://api.openai.com")
+print(f"openai.base_url is {openai.base_url}")
+
 
 OLLAMA_HOST = os.environ.get("OLLAMA_HOST", "http://localhost:11434")
 
