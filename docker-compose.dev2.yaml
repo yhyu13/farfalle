@@ -2,22 +2,19 @@ services:
   # backend:
   #   build:
   #     context: .
-  #     dockerfile: ./src/backend/Dockerfile.dev
-  #     network: host
-  #   network_mode: host
+  #     dockerfile: ./src/backend/Dockerfile
   #   restart: always
-  #   volumes:
-  #     - ./src/backend:src/backend
-  #   # ports:
-  #   #   - "8000:8000"
+  #   ports:
+  #     - "8000:8000"
   #   environment:
   #     - OLLAMA_HOST=${OLLAMA_HOST:-http://host.docker.internal:11434}
   #     - TAVILY_API_KEY=${TAVILY_API_KEY}
   #     - OPENAI_API_KEY=${OPENAI_API_KEY}
   #     - GROQ_API_KEY=${GROQ_API_KEY}
   #     - ENABLE_LOCAL_MODELS=${ENABLE_LOCAL_MODELS:-True}
-  #   env_file:
-  #     - .env
+  #     - SEARCH_PROVIDER=${SEARCH_PROVIDER:-tavily}
+  #     - SEARXNG_BASE_URL=${SEARXNG_BASE_URL:-http://host.docker.internal:8080}
+  #     - REDIS_URL=${REDIS_URL}
   #   develop:
   #     watch:
   #       - action: sync
@@ -30,15 +27,15 @@ services:
     #   - backend
     build:
       context: .
-      dockerfile: ./src/frontend/Dockerfile.dev
+      dockerfile: ./src/frontend/Dockerfile
       network: host
     network_mode: host
     restart: always
     environment:
       - NEXT_PUBLIC_API_URL=${NEXT_PUBLIC_API_URL:-http://localhost:8000}
       - NEXT_PUBLIC_LOCAL_MODE_ENABLED=${NEXT_PUBLIC_LOCAL_MODE_ENABLED:-true}
-    # ports:
-    #   - "3000:3000"
+    ports:
+      - "3000:3000"
     develop:
       watch:
         - action: sync
