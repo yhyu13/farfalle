@@ -2,6 +2,7 @@
 eval "$(conda shell.bash hook)"
 conda activate farfalle
 
+source myp
 export PYTHONDONTWRITEBYTECODE=1
 export PYTHONUNBUFFERED=1
 export PYTHONIOENCODING=utf-8
